@@ -163,10 +163,11 @@
                                         </q-input>
                                         
                                         <div class="right-text">
-                                            <span class="text-h6">2678</span>
+                                            <span class="text-h6">{{ form.verificationCodeBase }}</span>
                                         </div>
                                     </div>
                                     <span class="text-negative">{{ errors[0] }}</span>
+                                    <span v-if="form.verificationError.error" class="text-negative">{{ form.verificationError.message }}</span>
                                 </ValidationProvider>
                             </div>
                         </div>
@@ -209,7 +210,6 @@ export default {
     },
     data(){
         return {
-            value: "",
             form: {
                 iAgree: false,
                 userName: "",
@@ -219,14 +219,37 @@ export default {
                 emailAddress: "",
                 idNo: "",
                 referral: "",
-                verificationCode: ""
+                verificationCode: "",
+                verificationError: {
+                    error: false,
+                    message: ""
+                },
+                verificationCodeBase: ""
             }
         }
     },
     methods: {
         submitForm() {
-            alert('Form is Validated!')
+            this.isVerificationCodeValid()
+            if(this.form.verificationError.error != true){
+                alert('Form is Validated!')
+            }
+        },
+        isVerificationCodeValid(){
+            if(this.form.verificationCode != this.form.verificationCodeBase){
+                this.form.verificationError.error = true
+                this.form.verificationError.message = 'Invalid verification Code.'
+            }else{
+                this.form.verificationError.error = false
+                this.form.verificationError.message = ''
+            }
+        },
+        generateNumber() {
+            this.form.verificationCodeBase = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
         }
+    },
+    created(){
+        this.generateNumber()
     }
 }
 </script>
@@ -267,7 +290,7 @@ export default {
         top: 0;
         width: 50%;
         height: 2px;
-        z-index: 0; /* Behind the content */
+        z-index: 0;
     }
     .line::before {
         left: 0;
@@ -327,9 +350,9 @@ export default {
         display: flex;
         align-items: stretch;
     }
-    .input-container .input {
-        border-top-right-radius: 0 0 !important;
-        border-bottom-right-radius: 0 0 !important;
+    .input-verification {
+        /* background-color: #121212 !important; */
+        border-radius: 5px 0 0 5px !important;
     }
     .text-input {
         flex: 3; 

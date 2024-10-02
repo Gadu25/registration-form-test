@@ -2,7 +2,6 @@ import Vue from 'vue';
 import { required, confirmed, length, email } from "vee-validate/dist/rules";
 import { ValidationObserver, ValidationProvider, extend } from 'vee-validate';
 
-// Register components
 Vue.component('ValidationObserver', ValidationObserver);
 Vue.component('ValidationProvider', ValidationProvider);
 
