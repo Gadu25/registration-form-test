@@ -2,25 +2,15 @@
     .container.q-pa-md
         .text-center.row.justify-center.q-my-md
             h4.logo.q-px-md.q-py-sm.text-weight-bold.text-yellow-12.q-inline|LOGO
-        h4.q-mb-lg.text-center.text-weight-bold.text-white|Free Registration
-        .nav-buttons.row.justify-center
-            .nav-box.row.justify-center.items-center
-                .line
-                span.q-pa-sm.q-mx-lg.circle.circle-active.text-weight-bold.text-subtitle1.bg-dark.text-white|1
-                span.q-pa-sm.q-mx-lg.circle.text-weight-bold.text-subtitle1.bg-dark.text-white|2
-                span.q-pa-sm.q-mx-lg.circle.text-weight-bold.text-subtitle1.bg-dark.text-white|3
+        Title(
+            :title="title"
+        )
+        Stepper(
+            :count="stepper.count"
+            :active="stepper.active"
+        )
         .form-box
-            .column.justify-center.items-center.q-my-sm.q-py-sm
-                p.text-subtitle2|Continue With
-                .socs
-                    img(
-                        src="~/assets/images/fb.svg"
-                        alt="facebook logo"
-                    )
-                    img(
-                        src="~/assets/images/google.svg"
-                        alt="google logo"
-                    )
+            SocialMedia
             .row.justify-center.items-center.full-width.q-mx-sm
                 .solid-line.col
                 div
@@ -192,23 +182,37 @@
                                     color="yellow-9" 
                                     rounded
                                 )
-        .blank-circles
-            .blank-circle
-            .blank-circle
-            .blank-circle
+        BlankCircles(
+            :count=3
+        )
 
 </template>
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
+import Title from '../components/register/Title.vue';
+import Stepper from '../components/register/Stepper.vue';
+import FormContainer from '../components/Layout/FormContainer.vue';
+import SocialMedia from '../components/register/SocialMedia.vue';
+import BlankCircles from '../components/register/BlankCircles.vue';
 
 export default {
     name: 'RegistrationForm',
     components: {
-        ValidationProvider
+        ValidationProvider,
+        Title,
+        Stepper,
+        FormContainer,
+        SocialMedia,
+        BlankCircles
     },
     data(){
         return {
+            title: "Free Registration",
+            stepper: {
+                count: 3,
+                active: 1
+            },
             form: {
                 iAgree: false,
                 userName: "",
@@ -273,32 +277,6 @@ export default {
     .logo {
         background-color: #101825;
     }
-    .nav-box {
-        position: relative;
-        padding-left: 18px;
-        padding-right: 18px;
-    }
-    .line {
-        position: absolute;
-        width: 125%;
-    }
-    .line::before,
-    .line::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        width: 50%;
-        height: 2px;
-        z-index: 0;
-    }
-    .line::before {
-        left: 0;
-        background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
-    }
-    .line::after {
-        right: 0;
-        background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
-    }
     span {
         cursor: pointer;
     }
@@ -335,10 +313,7 @@ export default {
     .text-white {
         color: white;
     }
-    .socs img {
-        margin: 0 10px;
-        cursor: pointer;
-    }
+    
     .register-button {
         font-size: medium !important;
         text-transform: capitalize!important;
@@ -372,32 +347,5 @@ export default {
         justify-content: center;
         align-items: center;
     }
-    .blank-circles {
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        right: 0;
-        top: 50%;
-    }
-    .blank-circles .blank-circle {
-        height: 40px;
-        width: 40px;
-        margin: 8px;
-        background-color: #363636;
-
-        border-radius: 100px;
-        cursor: pointer;
-        transition: all .3s linear;
-    }
-    .blank-circle:hover {
-        background-color: #EBA013;
-    }
-    @media only screen and (max-width: 1024px){
-        .blank-circles {
-            position: relative;
-            display: flex;
-            flex-direction: row;
-            margin-bottom: 20px;
-        }
-    }
+    
 </style>
