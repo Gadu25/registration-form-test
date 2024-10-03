@@ -1,203 +1,202 @@
-<template>
-    <div class="container q-pa-md">
-        <div class="text-center row justify-center q-my-md">
-            <h4 class="logo q-px-md q-py-sm text-weight-bold text-yellow-12 q-inline">LOGO</h4>
-        </div>
-        <h4 class="q-mb-lg text-center text-weight-bold text-white">Free Registration</h4>
-    
-        <div class="nav-buttons row justify-center">
-            <div class="nav-box row justify-center items-center">
-                <div class="line"></div>
-                <span class="q-pa-sm q-mx-lg circle circle-active text-weight-bold text-subtitle1 bg-dark text-white">
-                    1
-                </span>
-                <span class="q-pa-sm q-mx-lg circle text-weight-bold text-subtitle1 bg-dark text-white">
-                    2
-                </span>
-                <span class="q-pa-sm q-mx-lg circle text-weight-bold text-subtitle1 bg-dark text-white">
-                    3
-                </span>
-            </div>
-        </div>
-
-        <div class="form-box">
-            <div class="column justify-center items-center q-my-sm q-py-sm">
-                <p class="text-subtitle2">Continue With</p>
-                <div class="socs">
-                    <img src="~/assets/images/fb.svg" alt="facebook logo"/>
-                    <img src="~/assets/images/google.svg" alt="google logo"/>
-                </div>
-            </div>
-            <div class="row justify-center items-center full-width q-mx-sm">
-                <div class="solid-line col"></div>
-                <div>
-                    <p class="text-subtitle2 q-mt-md q-px-md col-4">or</p>
-                </div>
-                <div class="solid-line col"></div>
-            </div>
-            <ValidationObserver ref="observer" v-slot="{ handleSubmit }">
-                <form @submit.prevent="handleSubmit(submitForm)">
-                    <div class="row content-space-between">
-                        <div class="col-md-6 col-sm-12 col-12">
-                            <div class="q-pa-md">
-                                <label>Username</label>
-                                <ValidationProvider rules="required" v-slot="{ errors, invalid, validated }">
-                                    <q-input 
+<template lang="pug">
+    .container.q-pa-md
+        .text-center.row.justify-center.q-my-md
+            h4.logo.q-px-md.q-py-sm.text-weight-bold.text-yellow-12.q-inline|LOGO
+        h4.q-mb-lg.text-center.text-weight-bold.text-white|Free Registration
+        .nav-buttons.row.justify-center
+            .nav-box.row.justify-center.items-center
+                .line
+                span.q-pa-sm.q-mx-lg.circle.circle-active.text-weight-bold.text-subtitle1.bg-dark.text-white|1
+                span.q-pa-sm.q-mx-lg.circle.text-weight-bold.text-subtitle1.bg-dark.text-white|2
+                span.q-pa-sm.q-mx-lg.circle.text-weight-bold.text-subtitle1.bg-dark.text-white|3
+        .form-box
+            .column.justify-center.items-center.q-my-sm.q-py-sm
+                p.text-subtitle2|Continue With
+                .socs
+                    img(
+                        src="~/assets/images/fb.svg"
+                        alt="facebook logo"
+                    )
+                    img(
+                        src="~/assets/images/google.svg"
+                        alt="google logo"
+                    )
+            .row.justify-center.items-center.full-width.q-mx-sm
+                .solid-line.col
+                div
+                    p.text-subtitle2.q-mt-md.q-px-md.col-4|or
+                .solid-line.col
+            ValidationObserver(
+                ref="observer"
+                v-slot="{handleSubmit}"
+            )
+                form(
+                    @submit.prevent="handleSubmit(submitForm)"
+                )
+                    .row.content-space-between
+                        .col-md-6.col-sm-12.col-12
+                            .q-pa-md
+                                label|Username
+                                ValidationProvider(
+                                    rules="required" 
+                                    v-slot="{ errors, invalid, validated }"
+                                )
+                                    q-input(
                                         :standout="invalid && validated ? 'bg-yellow-9 text-negative': 'bg-yellow-9 text-white'" 
                                         label="Please enter username."  
                                         dark 
                                         dense 
-                                        v-model="form.userName">
-                                    </q-input>
-                                    <span class="text-negative">{{ errors[0] }}</span>
-                                </ValidationProvider>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12 col-12">
-                            <div class="q-pa-md">
-                                <label>Password</label>
-                                <ValidationProvider rules="required" name="password" v-slot="{ errors, invalid, validated }">
-                                    <q-input 
+                                        v-model="form.userName"
+                                    )
+                                    span.text-negative|{{errors[0]}}
+                        .col-md-6.col-sm-12.col-12
+                            .q-pa-md
+                                label|Password
+                                ValidationProvider(
+                                    rules="required"
+                                    name="password" 
+                                    v-slot="{ errors, invalid, validated }"
+                                )
+                                    q-input(
                                         :standout="invalid && validated ? 'bg-yellow-9 text-negative': 'bg-yellow-9 text-white'" 
-                                        name="password" 
-                                        type="password" 
-                                        label="Please enter password." 
+                                        name="password"
+                                        type="password"
+                                        label="Please enter password."  
                                         dark 
                                         dense 
-                                        v-model="form.password">
-                                    </q-input>
-                                    <span class="text-negative">{{ errors[0] }}</span>
-                                </ValidationProvider>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12 col-12">
-                            <div class="q-pa-md">
-                                <label>Confirm Password</label>
-                                <ValidationProvider rules="required|confirmed:password" name="confirmation" v-slot="{ errors, invalid, validated }">
-                                    <q-input 
-                                        :standout="invalid && validated ? 'bg-yellow-9 text-negative': 'bg-yellow-9 text-white'"  
-                                        name="confirmation" 
-                                        type="password" 
-                                        label="Please enter password." 
-                                        dark 
-                                        dense 
-                                        v-model="form.confirmPassword">
-                                    </q-input>
-                                    <span class="text-negative">{{ errors[0] }}</span>
-                                </ValidationProvider>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12 col-12">
-                            <div class="q-pa-md">
-                                <label>Mobile Number</label>
-                                <ValidationProvider rules="required" v-slot="{ errors, invalid, validated }">
-                                    <q-input 
-                                        :standout="invalid && validated ? 'bg-yellow-9 text-negative': 'bg-yellow-9 text-white'"
-                                        label="Please enter mobile number."
-                                        type="number"
-                                        dark 
-                                        dense 
-                                        v-model="form.mobileNumber">
-                                    </q-input>
-                                    <span class="text-negative">{{ errors[0] }}</span>
-                                </ValidationProvider>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12 col-12">
-                            <div class="q-pa-md">
-                                <label>E-mail Address</label>
-                                <ValidationProvider rules="required|email" v-slot="{ errors, invalid, validated }">
-                                    <q-input 
-                                        :standout="invalid && validated ? 'bg-yellow-9 text-negative': 'bg-yellow-9 text-white'"
-                                        label="Please enter e-mail address." 
-                                        dark 
-                                        dense 
-                                        v-model="form.emailAddress">
-                                    </q-input>
-                                    <span class="text-negative">{{ errors[0] }}</span>
-                                </ValidationProvider>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12 col-12">
-                            <div class="q-pa-md">
-                                <label>Identify no</label>
-                                <ValidationProvider rules="required" v-slot="{ errors, invalid, validated }">
-                                    <q-input 
-                                        :standout="invalid && validated ? 'bg-yellow-9 text-negative': 'bg-yellow-9 text-white'"
-                                        label="Please enter correct ID number." 
-                                        dark 
-                                        dense 
-                                        v-model="form.idNo">
-                                    </q-input>
-                                    <span class="text-negative">{{ errors[0] }}</span>
-                                </ValidationProvider>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12 col-12">
-                            <div class="q-pa-md">
-                                <label>Referral</label>
-                                    <q-input 
-                                        standout="bg-yellow-9 text-white"
-                                        label="Please enter referral username." 
-                                        dark 
-                                        dense 
-                                        v-model="form.referral">
-                                    </q-input>
-                                <span class="text-grey-1">
-                                    <small>Leave it blank if no referral.</small>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12 col-12">
-                            <div class="q-pa-md">
-                                <label>Verification Code</label>
-                                <ValidationProvider rules="required" v-slot="{ errors, invalid, validated }">
-                                    <div class="input-container">
-                                        <q-input 
-                                            class="input-verification" 
-                                            :standout="invalid && validated ? 'bg-yellow-9 text-negative': 'bg-yellow-9 text-white'"
-                                            label="Verification Code." 
+                                        v-model="form.password"
+                                    )
+                                    span.text-negative|{{errors[0]}}
+                        .col-md-6.col-sm-12.col-12
+                                .q-pa-md
+                                    label|Confirm Password
+                                    ValidationProvider(
+                                        rules="required|confirmed:password"
+                                        name="confimation"
+                                        v-slot="{ errors, invalid, validated }"
+                                    )
+                                        q-input(
+                                            :standout="invalid && validated ? 'bg-yellow-9 text-negative': 'bg-yellow-9 text-white'" 
+                                            name="confirmation"
+                                            type="password"
+                                            label="Please enter password."  
                                             dark 
                                             dense 
-                                            v-model="form.verificationCode">
-                                        </q-input>
-                                        
-                                        <div class="right-text">
-                                            <span class="text-h6">{{ form.verificationCodeBase }}</span>
-                                        </div>
-                                    </div>
-                                    <span class="text-negative">{{ errors[0] }}</span>
-                                    <span v-if="form.verificationError.error" class="text-negative">{{ form.verificationError.message }}</span>
-                                </ValidationProvider>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column justify-center items-center q-my-sm">
-                        <ValidationProvider rules="agree" v-slot="{ errors, invalid, validated }">
-                            <div class="column items-center q-mb-sm">
-                                <div class="row items-center">
-                                    <q-checkbox label="I agree." dark v-model="form.iAgree" ></q-checkbox>
-                                    <span class="text-amber-13">OCMS Terms & Conditions</span>
-                                </div>
-                                <span class="text-negative" style="text-align: center;">{{ errors[0] }}</span>
-                            </div>
-                        </ValidationProvider>
-                        <div class="row justify-center full-width">
-                            <div class="col-md-3 col-sm-12 col-12">
-                                <q-btn class="q-my-md full-width register-button" label="Register" type="submit" size="lg" color="yellow-9" rounded></q-btn>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </ValidationObserver>
-        </div>
+                                            v-model="form.confirmPassword"
+                                        )
+                                        span.text-negative|{{errors[0]}}
+                        .col-md-6.col-sm-12.col-12
+                                .q-pa-md
+                                    label|Mobile Number
+                                    ValidationProvider(
+                                        rules="required"
+                                        v-slot="{ errors, invalid, validated }"
+                                    )
+                                        q-input(
+                                            :standout="invalid && validated ? 'bg-yellow-9 text-negative': 'bg-yellow-9 text-white'"
+                                            type="number"
+                                            label="Please enter password."  
+                                            dark 
+                                            dense 
+                                            v-model="form.mobileNumber"
+                                        )
+                                        span.text-negative|{{errors[0]}}
+                        .col-md-6.col-sm-12.col-12
+                                .q-pa-md
+                                    label|E-mail Address
+                                    ValidationProvider(
+                                        rules="required|email"
+                                        v-slot="{ errors, invalid, validated }"
+                                    )
+                                        q-input(
+                                            :standout="invalid && validated ? 'bg-yellow-9 text-negative': 'bg-yellow-9 text-white'"
+                                            type="email"
+                                            label="Please enter e-mail address."  
+                                            dark 
+                                            dense 
+                                            v-model="form.emailAddress"
+                                        )
+                                        span.text-negative|{{errors[0]}}
+                        .col-md-6.col-sm-12.col-12
+                                .q-pa-md
+                                    label|Identify no
+                                    ValidationProvider(
+                                        rules="required"
+                                        v-slot="{ errors, invalid, validated }"
+                                    )
+                                        q-input(
+                                            :standout="invalid && validated ? 'bg-yellow-9 text-negative': 'bg-yellow-9 text-white'"
+                                            label="Please enter correct ID number."  
+                                            dark 
+                                            dense 
+                                            v-model="form.idNo"
+                                        )
+                                        span.text-negative|{{errors[0]}}
+                        .col-md-6.col-sm-12.col-12
+                                .q-pa-md
+                                    label|Referral
+                                    q-input(
+                                        :standout="invalid && validated ? 'bg-yellow-9 text-negative': 'bg-yellow-9 text-white'"
+                                        label="Please enter correct ID number."  
+                                        dark 
+                                        dense 
+                                        v-model="form.referral"
+                                    )
+                                    span.text-grey-1
+                                        small|Leave it blank if no referral.
+                        .col-md-6.col-sm-12.col-12
+                                .q-pa-md
+                                    label|Verification Code
+                                    ValidationProvider(
+                                        rules="required"
+                                        v-slot="{ errors, invalid, validated }"
+                                    )
+                                        .input-container
+                                            q-input.input-verification(
+                                                :standout="invalid && validated ? 'bg-yellow-9 text-negative': 'bg-yellow-9 text-white'"
+                                                label="Please enter correct ID number."  
+                                                dark 
+                                                dense 
+                                                v-model="form.verificationCode"
+                                            )
+                                            .right-text
+                                                span.text-h6|{{form.verificationCodeBase}}
+                                        span.text-negative|{{errors[0]}}
+                                        span.text-negative(
+                                            v-if="form.verificationError.error"
+                                        )
+                                            |{{form.verificationError.message}}
+                    .column.justify-center.items-center.q-my-sm
+                        ValidationProvider(
+                            rules="agree"
+                            v-slot="{errors, invalid, validated}"
+                        )
+                            .column.items-center.q-mb-sm
+                                .row.items-center
+                                    q-checkbox(
+                                        label="I agree."
+                                        dark
+                                        v-model="form.iAgree"
+                                    )
+                                    span.text-amber-13|OCMS Terms & Conditions
+                                span.text-negative(
+                                    style="text-align: center;"
+                                )
+                                    |{{errors[0]}}
+                        .row.justify-center.full-width
+                            .col-md-3.col-sm-12.col-12
+                                q-btn.q-my-md.full-width.register-button(
+                                    label="Register"
+                                    type="submit"
+                                    size="lg" 
+                                    color="yellow-9" 
+                                    rounded
+                                )
+        .blank-circles
+            .blank-circle
+            .blank-circle
+            .blank-circle
 
-        <div class="blank-circles">
-            <div class="blank-circle"></div>
-            <div class="blank-circle"></div>
-            <div class="blank-circle"></div>
-        </div>
-    </div>
 </template>
 
 <script>
