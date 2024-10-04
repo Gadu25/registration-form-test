@@ -29,20 +29,8 @@
                             :key="index"
                         )
                             .q-pa-md
-                                CustomInput(
-                                    v-if="input.rightText == false"
-                                    :index="index"
-                                    :label="input.label"
-                                    :name="input.name"
-                                    :rules="input.rules"
-                                    :placeHolder="input.placeHolder"
-                                    :type="input.type"
-                                    :value="input.value",
-                                    :subText="input.subText"
-                                    @updateInput="updateInput"
-                                )
                                 CustomInputRightText(
-                                    v-else
+                                    v-if="input.rightText"
                                     :index="index"
                                     :label="input.label"
                                     :name="input.name"
@@ -51,6 +39,18 @@
                                     :type="input.type"
                                     :value="input.value",
                                     :form="form"
+                                    @updateInput="updateInput"
+                                )
+                                CustomInput(
+                                    v-else
+                                    :index="index"
+                                    :label="input.label"
+                                    :name="input.name"
+                                    :rules="input.rules"
+                                    :placeHolder="input.placeHolder"
+                                    :type="input.type"
+                                    :value="input.value",
+                                    :subText="input.subText"
                                     @updateInput="updateInput"
                                 )
                     .column.justify-center.items-center.q-my-sm
