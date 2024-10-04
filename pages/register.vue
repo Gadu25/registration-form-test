@@ -201,7 +201,13 @@ export default {
         submitForm() {
             this.isVerificationCodeValid()
             if(this.form.verificationError.error != true){
-                alert('Form is Validated!')
+                let display = ""
+                for(let value of this.formData){
+                    if(!(value.name == "password" || value.name == "confirmation" || value.name == "referral" || value.name == "verification")){
+                        display += `${value.label}: ${value.value}\n`
+                    }
+                }
+                alert("Welcome!\n\n"+display);
             }
         },
         isVerificationCodeValid(){
