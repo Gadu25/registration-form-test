@@ -1,5 +1,8 @@
 <template lang="pug">
-    h4.q-mb-lg.text-center.text-weight-bold.text-white|{{title}}
+    h4.q-mb-lg.text-center.text-weight-bold(
+        :class=color
+    )
+        |{{title}}
 </template>
 
 <script>
@@ -9,7 +12,8 @@ export default {
         return {}
     },
     props: {
-        title: String
+        title: String,
+        color: String
     }
 }
 </script>

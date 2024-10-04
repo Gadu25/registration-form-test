@@ -17,8 +17,14 @@ export default {
         }
     },
     props: {
-        count: Number,
-        active: Number,
+        count: {
+            default: 3,
+            type: Number 
+        },
+        active: {
+            default: 1,
+            type: Number
+        },
     }
 }
 </script>
@@ -48,5 +54,20 @@ export default {
     .line::after {
         right: 0;
         background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+    }
+    .circle {
+        border-radius: 100px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #000000;
+        z-index: 1;
+    }
+    .circle.circle-active {
+        width: 60px;
+        height: 60px;
+        background-color: #EBA013!important;
     }
 </style>

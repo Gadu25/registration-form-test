@@ -10,7 +10,7 @@
                     :standout="invalid && validated ? 'bg-yellow-9 text-negative': 'bg-yellow-9 text-white'" 
                     :label="placeHolder"  
                     :type="type"
-                    dark 
+                    :dark="dark" 
                     dense 
                     v-model="internalValue"
                     @input="onInput"
@@ -25,8 +25,13 @@
 </template>
 
 <script>
+import { ValidationProvider } from 'vee-validate';
+
     export default {
         name: "CustomInputRightText",
+        components: {
+            ValidationProvider
+        },
         data(){
             return {
                 internalValue: this.value
@@ -40,7 +45,8 @@
             placeHolder: String,
             type: String,
             value: String,
-            form: Object
+            form: Object,
+            dark: Boolean
         },
         methods: {
             onInput(value){
@@ -57,5 +63,22 @@
 </script>
 
 <style scoped>
+.input-container {
+    display: flex;
+    align-items: stretch;
+}
+.right-text {
+    flex: 1;
+    width: 100%;
+    font-size: 14px; 
+    color: red;
 
+    border-top-right-radius: 5px 5px;
+    border-bottom-right-radius: 5px 5px;
+    background-color: #E8E8E8;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 </style>

@@ -4,6 +4,7 @@
             h4.logo.q-px-md.q-py-sm.text-weight-bold.text-yellow-12.q-inline|LOGO
         Title(
             :title="title"
+            color="text-white"
         )
         Stepper(
             :count="stepper.count"
@@ -38,6 +39,7 @@
                                     :placeHolder="input.placeHolder"
                                     :type="input.type"
                                     :value="input.value",
+                                    :dark="input.dark"
                                     :form="form"
                                     @updateInput="updateInput"
                                 )
@@ -51,6 +53,7 @@
                                     :type="input.type"
                                     :value="input.value",
                                     :subText="input.subText"
+                                    :dark="input.dark"
                                     @updateInput="updateInput"
                                 )
                     .column.justify-center.items-center.q-my-sm
@@ -74,10 +77,10 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
-import Title from '../components/register/Title.vue';
-import Stepper from '../components/register/Stepper.vue';
-import SocialMedia from '../components/register/SocialMedia.vue';
-import BlankCircles from '../components/register/BlankCircles.vue';
+import Title from '../components/Register/Title.vue';
+import Stepper from '../components/Register/Stepper.vue';
+import SocialMedia from '../components/Register/SocialMedia.vue';
+import BlankCircles from '../components/Register/BlankCircles.vue';
 import CustomInput from '../components/Form/CustomInput.vue';
 import CustomInputRightText from '../components/Form/CustomInputRightText.vue';
 import CustomCheckbox from '../components/Form/CustomCheckbox.vue';
@@ -113,6 +116,7 @@ export default {
                     type: "text",
                     value: "",
                     subText: "",
+                    dark: true,
                     rightText: false
                 },
                 {
@@ -123,6 +127,7 @@ export default {
                     type: "password",
                     value: "",
                     subText: "",
+                    dark: true,
                     rightText: false
                 },
                 {
@@ -133,6 +138,7 @@ export default {
                     type: "password",
                     value: "",
                     subText: "",
+                    dark: true,
                     rightText: false
                 },
                 {
@@ -143,6 +149,7 @@ export default {
                     type: "number",
                     value: "",
                     subText: "",
+                    dark: true,
                     rightText: false
                 },
                 {
@@ -153,6 +160,7 @@ export default {
                     type: "email",
                     value: "",
                     subText: "",
+                    dark: true,
                     rightText: false
                 },
                 {
@@ -163,6 +171,7 @@ export default {
                     type: "text",
                     value: "",
                     subText: "",
+                    dark: true,
                     rightText: false
                 },
                 {
@@ -173,6 +182,7 @@ export default {
                     type: "text",
                     value: "",
                     subText: "Leave it blank if no referral.",
+                    dark: true,
                     rightText: false
                 },
                 {
@@ -183,6 +193,7 @@ export default {
                     type: "text",
                     value: "",
                     subText: "",
+                    dark: true,
                     rightText: true
                 },
                 
@@ -277,21 +288,7 @@ export default {
         padding: 20px;
         color: white;
     }
-    .circle {
-        border-radius: 100px;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #000000;
-        z-index: 1;
-    }
-    .circle.circle-active {
-        width: 60px;
-        height: 60px;
-        background-color: #EBA013!important;
-    }
+
     .text-white {
         color: white;
     }
@@ -302,10 +299,7 @@ export default {
         text-shadow: .5px 1px #000000;
         padding: 10px 15px;
     }
-    .input-container {
-        display: flex;
-        align-items: stretch;
-    }
+    
     .input-verification {
         /* background-color: #121212 !important; */
         border-radius: 5px 0 0 5px !important;
@@ -315,19 +309,6 @@ export default {
         width: 100%;
         padding-right: 10px;
     }
-    .right-text {
-        flex: 1;
-        width: 100%;
-        font-size: 14px; 
-        color: red;
-
-        border-top-right-radius: 5px 5px;
-        border-bottom-right-radius: 5px 5px;
-        background-color: #E8E8E8;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+    
     
 </style>
