@@ -24,187 +24,78 @@
                     @submit.prevent="handleSubmit(submitForm)"
                 )
                     .row.content-space-between
-                        .col-md-6.col-sm-12.col-12
-                            .q-pa-md
-                                label|Username
-                                ValidationProvider(
-                                    rules="required" 
-                                    v-slot="{ errors, invalid, validated }"
-                                )
-                                    q-input(
-                                        :standout="invalid && validated ? 'bg-yellow-9 text-negative': 'bg-yellow-9 text-white'" 
-                                        label="Please enter username."  
-                                        dark 
-                                        dense 
-                                        v-model="form.userName"
-                                    )
-                                    span.text-negative|{{errors[0]}}
-                        .col-md-6.col-sm-12.col-12
-                            .q-pa-md
-                                label|Password
-                                ValidationProvider(
-                                    rules="required"
-                                    name="password" 
-                                    v-slot="{ errors, invalid, validated }"
-                                )
-                                    q-input(
-                                        :standout="invalid && validated ? 'bg-yellow-9 text-negative': 'bg-yellow-9 text-white'" 
-                                        name="password"
-                                        type="password"
-                                        label="Please enter password."  
-                                        dark 
-                                        dense 
-                                        v-model="form.password"
-                                    )
-                                    span.text-negative|{{errors[0]}}
-                        .col-md-6.col-sm-12.col-12
-                                .q-pa-md
-                                    label|Confirm Password
-                                    ValidationProvider(
-                                        rules="required|confirmed:password"
-                                        name="confimation"
-                                        v-slot="{ errors, invalid, validated }"
-                                    )
-                                        q-input(
-                                            :standout="invalid && validated ? 'bg-yellow-9 text-negative': 'bg-yellow-9 text-white'" 
-                                            name="confirmation"
-                                            type="password"
-                                            label="Please enter password."  
-                                            dark 
-                                            dense 
-                                            v-model="form.confirmPassword"
-                                        )
-                                        span.text-negative|{{errors[0]}}
-                        .col-md-6.col-sm-12.col-12
-                                .q-pa-md
-                                    label|Mobile Number
-                                    ValidationProvider(
-                                        rules="required"
-                                        v-slot="{ errors, invalid, validated }"
-                                    )
-                                        q-input(
-                                            :standout="invalid && validated ? 'bg-yellow-9 text-negative': 'bg-yellow-9 text-white'"
-                                            type="number"
-                                            label="Please enter password."  
-                                            dark 
-                                            dense 
-                                            v-model="form.mobileNumber"
-                                        )
-                                        span.text-negative|{{errors[0]}}
-                        .col-md-6.col-sm-12.col-12
-                                .q-pa-md
-                                    label|E-mail Address
-                                    ValidationProvider(
-                                        rules="required|email"
-                                        v-slot="{ errors, invalid, validated }"
-                                    )
-                                        q-input(
-                                            :standout="invalid && validated ? 'bg-yellow-9 text-negative': 'bg-yellow-9 text-white'"
-                                            type="email"
-                                            label="Please enter e-mail address."  
-                                            dark 
-                                            dense 
-                                            v-model="form.emailAddress"
-                                        )
-                                        span.text-negative|{{errors[0]}}
-                        .col-md-6.col-sm-12.col-12
-                                .q-pa-md
-                                    label|Identify no
-                                    ValidationProvider(
-                                        rules="required"
-                                        v-slot="{ errors, invalid, validated }"
-                                    )
-                                        q-input(
-                                            :standout="invalid && validated ? 'bg-yellow-9 text-negative': 'bg-yellow-9 text-white'"
-                                            label="Please enter correct ID number."  
-                                            dark 
-                                            dense 
-                                            v-model="form.idNo"
-                                        )
-                                        span.text-negative|{{errors[0]}}
-                        .col-md-6.col-sm-12.col-12
-                                .q-pa-md
-                                    label|Referral
-                                    q-input(
-                                        :standout="invalid && validated ? 'bg-yellow-9 text-negative': 'bg-yellow-9 text-white'"
-                                        label="Please enter correct ID number."  
-                                        dark 
-                                        dense 
-                                        v-model="form.referral"
-                                    )
-                                    span.text-grey-1
-                                        small|Leave it blank if no referral.
-                        .col-md-6.col-sm-12.col-12
-                                .q-pa-md
-                                    label|Verification Code
-                                    ValidationProvider(
-                                        rules="required"
-                                        v-slot="{ errors, invalid, validated }"
-                                    )
-                                        .input-container
-                                            q-input.input-verification(
-                                                :standout="invalid && validated ? 'bg-yellow-9 text-negative': 'bg-yellow-9 text-white'"
-                                                label="Please enter correct ID number."  
-                                                dark 
-                                                dense 
-                                                v-model="form.verificationCode"
-                                            )
-                                            .right-text
-                                                span.text-h6|{{form.verificationCodeBase}}
-                                        span.text-negative|{{errors[0]}}
-                                        span.text-negative(
-                                            v-if="form.verificationError.error"
-                                        )
-                                            |{{form.verificationError.message}}
-                    .column.justify-center.items-center.q-my-sm
-                        ValidationProvider(
-                            rules="agree"
-                            v-slot="{errors, invalid, validated}"
+                        .col-md-6.col-sm-12.col-12(
+                            v-for="(input, index) in formData"
+                            :key="index"
                         )
-                            .column.items-center.q-mb-sm
-                                .row.items-center
-                                    q-checkbox(
-                                        label="I agree."
-                                        dark
-                                        v-model="form.iAgree"
-                                    )
-                                    span.text-amber-13|OCMS Terms & Conditions
-                                span.text-negative(
-                                    style="text-align: center;"
+                            .q-pa-md
+                                CustomInput(
+                                    v-if="input.rightText == false"
+                                    :index="index"
+                                    :label="input.label"
+                                    :name="input.name"
+                                    :rules="input.rules"
+                                    :placeHolder="input.placeHolder"
+                                    :type="input.type"
+                                    :value="input.value",
+                                    :subText="input.subText"
+                                    @updateInput="updateInput"
                                 )
-                                    |{{errors[0]}}
+                                CustomInputRightText(
+                                    v-else
+                                    :index="index"
+                                    :label="input.label"
+                                    :name="input.name"
+                                    :rules="input.rules"
+                                    :placeHolder="input.placeHolder"
+                                    :type="input.type"
+                                    :value="input.value",
+                                    :form="form"
+                                    @updateInput="updateInput"
+                                )
+                    .column.justify-center.items-center.q-my-sm
+                        .column.items-center.q-mb-sm
+                            CustomCheckbox(
+                                label="I agree",
+                                subText="OCMS Terms & Conditions",
+                                value=false
+                            )
                         .row.justify-center.full-width
-                            .col-md-3.col-sm-12.col-12
-                                q-btn.q-my-md.full-width.register-button(
-                                    label="Register"
-                                    type="submit"
-                                    size="lg" 
-                                    color="yellow-9" 
-                                    rounded
-                                )
+                            CustomButton(
+                                label="Register"
+                                type="submit"
+                                size="lg" 
+                                color="yellow-9" 
+                            )
         BlankCircles(
             :count=3
         )
-
 </template>
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import Title from '../components/register/Title.vue';
 import Stepper from '../components/register/Stepper.vue';
-import FormContainer from '../components/Layout/FormContainer.vue';
 import SocialMedia from '../components/register/SocialMedia.vue';
 import BlankCircles from '../components/register/BlankCircles.vue';
+import CustomInput from '../components/Form/CustomInput.vue';
+import CustomInputRightText from '../components/Form/CustomInputRightText.vue';
+import CustomCheckbox from '../components/Form/CustomCheckbox.vue';
+import CustomButton from '../components/Form/CustomButton.vue';
 
 export default {
     name: 'RegistrationForm',
     components: {
         ValidationProvider,
+        ValidationObserver,
         Title,
         Stepper,
-        FormContainer,
         SocialMedia,
-        BlankCircles
+        BlankCircles,
+        CustomInput,
+        CustomInputRightText,
+        CustomCheckbox,
+        CustomButton
     },
     data(){
         return {
@@ -213,16 +104,91 @@ export default {
                 count: 3,
                 active: 1
             },
+            formData: [
+                {
+                    label: "Username",
+                    name: "username",
+                    rules: "required",
+                    placeHolder: "Please enter username.",
+                    type: "text",
+                    value: "",
+                    subText: "",
+                    rightText: false
+                },
+                {
+                    label: "Password",
+                    name: "password",
+                    rules: "required",
+                    placeHolder: "Please enter password.",
+                    type: "password",
+                    value: "",
+                    subText: "",
+                    rightText: false
+                },
+                {
+                    label: "Confirm Password",
+                    name: "confirmation",
+                    rules: "required|confirmed:password",
+                    placeHolder: "Please enter password.",
+                    type: "password",
+                    value: "",
+                    subText: "",
+                    rightText: false
+                },
+                {
+                    label: "Mobile Number",
+                    name: "mobileNo",
+                    rules: "required",
+                    placeHolder: "Please enter number.",
+                    type: "number",
+                    value: "",
+                    subText: "",
+                    rightText: false
+                },
+                {
+                    label: "E-mail Address",
+                    name: "email",
+                    rules: "required|email",
+                    placeHolder: "Please enter e-mail address.",
+                    type: "email",
+                    value: "",
+                    subText: "",
+                    rightText: false
+                },
+                {
+                    label: "Identity no",
+                    name: "idNo",
+                    rules: "required",
+                    placeHolder: "Please enter correct ID number.",
+                    type: "text",
+                    value: "",
+                    subText: "",
+                    rightText: false
+                },
+                {
+                    label: "Referral",
+                    name: "referral",
+                    rules: "",
+                    placeHolder: "Please enter referral username.",
+                    type: "text",
+                    value: "",
+                    subText: "Leave it blank if no referral.",
+                    rightText: false
+                },
+                {
+                    label: "Verification Code",
+                    name: "verification",
+                    rules: "required",
+                    placeHolder: "Verification Code.",
+                    type: "text",
+                    value: "",
+                    subText: "",
+                    rightText: true
+                },
+                
+            ],
             form: {
                 iAgree: false,
-                userName: "",
-                password: "",
-                confirmPassword: "",
-                mobileNumber: "",
-                emailAddress: "",
-                idNo: "",
-                referral: "",
-                verificationCode: "",
                 verificationError: {
                     error: false,
                     message: ""
@@ -239,13 +205,23 @@ export default {
             }
         },
         isVerificationCodeValid(){
-            if(this.form.verificationCode != this.form.verificationCodeBase){
-                this.form.verificationError.error = true
-                this.form.verificationError.message = 'Invalid verification Code.'
-            }else{
-                this.form.verificationError.error = false
-                this.form.verificationError.message = ''
+            for(let input of this.formData){
+                if(input.name == 'verification'){
+                    if(input.value != this.form.verificationCodeBase){
+                        this.form.verificationError.error = true
+                        this.form.verificationError.message = 'Invalid verification Code.'
+                    }else{
+                        this.form.verificationError.error = false
+                        this.form.verificationError.message = ''
+                    }
+                }
             }
+        },
+        updateInput(index, value){
+            this.formData[index].value = value
+        },
+        updateCheckBox(value){
+            this.form.iAgree = value
         },
         generateNumber() {
             this.form.verificationCodeBase = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;

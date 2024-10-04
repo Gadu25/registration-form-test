@@ -16,9 +16,6 @@ export default {
             
         }
     },
-    computed(){
-
-    },
     props: {
         count: Number,
         active: Number,

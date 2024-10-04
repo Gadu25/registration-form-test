@@ -14,8 +14,11 @@
 
 <script>
     export default {
+        name: 'SocialMedia',
         data(){
+            return {
 
+            }
         }
     }
 </script>

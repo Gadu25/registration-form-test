@@ -7,8 +7,11 @@
 
 <script>
     export default {
+        name: 'BlankCircles',
         data(){
+            return {
 
+            }
         },
         props: {
             count: Number
