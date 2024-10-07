@@ -7,7 +7,7 @@
             .row.items-center
                 q-checkbox(
                     :label="label+'.'"
-                    dark
+                    :dark="dark"
                     v-model="internalValue"
                     @change="onChange"
                 )
@@ -19,8 +19,10 @@
 </template>
 
 <script>
+    import { ValidationProvider,ValidationObserver } from 'vee-validate';
     export default {
         name: "CustomCheckbox",
+        components: {ValidationProvider},
         data(){
             return {
                 internalValue: this.value
@@ -41,6 +43,7 @@
             label: String,
             subText: String,
             value: Boolean,
+            dark: Boolean
         }
     }
 </script>

@@ -63,6 +63,7 @@
                                 label="I agree",
                                 subText="OCMS Terms & Conditions",
                                 value=false
+                                dark=true
                             )
                         .row.justify-center.full-width
                             CustomButton(
