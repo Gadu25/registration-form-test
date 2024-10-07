@@ -1,6 +1,6 @@
 <template lang="pug">
     h4.q-mb-lg.text-center.text-weight-bold(
-        :class=color
+        :class="color"
     )
         |{{title}}
 </template>

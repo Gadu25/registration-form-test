@@ -4,11 +4,12 @@
             h4.logo.q-px-md.q-py-sm.text-weight-bold.text-yellow-12.q-inline|LOGO
         Title(
             :title="title"
-            color="text-white"
+            color='text-white'
         )
         Stepper(
             :count="stepper.count"
             :active="stepper.active"
+            @handleStepperClick="handleStepperClick"
         )
         .form-box
             SocialMedia
@@ -239,6 +240,9 @@ export default {
         },
         updateCheckBox(value){
             this.form.iAgree = value
+        },
+        handleStepperClick(value){
+            this.stepper.active = value
         },
         generateNumber() {
             this.form.verificationCodeBase = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;

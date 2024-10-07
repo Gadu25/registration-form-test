@@ -2,7 +2,8 @@ import Stepper from "../components/Register/Stepper.vue"
 
 const props = {
     count: 3,
-    active: 1
+    active: 1,
+    handleStepperClick: () => {}
 }
 
 export default {
@@ -25,6 +26,13 @@ export default {
             control: {
                 type: 'number'
             }
+        },
+        handleStepperClick: {
+            description: 'Function to switch the active steps',
+            defaultValue: {
+                summary: '{}'
+            },
+            action: 'clicked' // This will log the action in Storybook
         }
     }
 };
@@ -36,6 +44,7 @@ export const StepperComponent = (args, {argTypes}) => ({
                     <Stepper
                         :count=count
                         :active=active
+                        :handleStepperClick=handleStepperClick
                     />
                 </div>`
 });
