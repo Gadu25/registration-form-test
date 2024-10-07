@@ -4,7 +4,7 @@
                 .line
                 span.q-pa-sm.q-mx-lg.circle.text-weight-bold.text-subtitle1.bg-dark.text-white(
                     v-for="(x, index) in count" :key="x"
-                    :class="x==active ? 'circle-active': ''"
+                    :class="x==internalActive ? 'circle-active': ''"
                     v-on:click="handleClick(x)"
                 )
                     |{{x}}
@@ -14,13 +14,21 @@ export default {
     name: 'Stepper',
     data(){
         return {
-            // internalActive: this.active
+            internalActive: this.active
         }
     },
     methods: {
         handleClick(newValue) {
-            // this.internalActive = newValue
+            this.internalActive = newValue
             this.$emit('handleStepperClick', newValue)
+        }
+    },
+    watch: {
+        active(newValue) {
+            this.internalActive = newValue;
+        },
+        internalActive(newValue) {
+            this.$emit('handleStepperClick', newValue);
         }
     },
     props: {
