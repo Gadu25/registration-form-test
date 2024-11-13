@@ -1,9 +1,16 @@
+// import { action } from "@storybook/addon-actions";
 import Stepper from "../components/Register/Stepper.vue"
 
 const props = {
     count: 3,
     active: 1,
-    handleStepperClick: () => {}
+    handleStepperClick: () => {
+        action('click')([{id:0}])
+    },
+    // handleClickEvent: () => {
+    //     // action('Clicked')
+    //     // alert('test')
+    // }
 }
 
 export default {
@@ -27,12 +34,15 @@ export default {
                 type: 'number'
             }
         },
-        handleStepperClick: {
-            description: 'Function to switch the active steps',
+        handleClickEvent: {
+            description: 'Function to switch the active steps', 
+            type: {
+                required: false,
+              },
             defaultValue: {
-                summary: '{}'
+                summary: '() => ({})'
             },
-            action: 'clicked' // This will log the action in Storybook
+            action: 'clicked'
         }
     }
 };
@@ -44,9 +54,14 @@ export const StepperComponent = (args, {argTypes}) => ({
                     <Stepper
                         :count=count
                         :active=active
-                        :handleStepperClick=handleStepperClick
+                        :handleClickEvent="handleClickEvent"
                     />
                 </div>`
 });
 
-StepperComponent.args = Object.assign({}, props, {});
+StepperComponent.args = Object.assign({}, props, {
+    // handleClickEvent: () => {
+    //     action('Clicked 2')
+    //     // alert('test')
+    // }
+});
