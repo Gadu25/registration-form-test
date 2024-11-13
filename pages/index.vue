@@ -79,10 +79,10 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
-import Title from '../components/Register/Title.vue';
-import Stepper from '../components/Register/Stepper.vue';
-import SocialMedia from '../components/Register/SocialMedia.vue';
-import BlankCircles from '../components/Register/BlankCircles.vue';
+import Title from '../components/register/Title.vue';
+import Stepper from '../components/register/Stepper.vue';
+import SocialMedia from '../components/register/SocialMedia.vue';
+import BlankCircles from '../components/register/BlankCircles.vue';
 import CustomInput from '../components/Form/CustomInput.vue';
 import CustomInputRightText from '../components/Form/CustomInputRightText.vue';
 import CustomCheckbox from '../components/Form/CustomCheckbox.vue';
